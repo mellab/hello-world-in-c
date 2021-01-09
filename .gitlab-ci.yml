@@ -1,0 +1,21 @@
+image: gcc:4.8.4
+
+build:
+  stage: build
+  before_script:
+    - git clone https://github.com/holbertonschool/Betty.git
+    - cd ./Betty
+    - ./install.sh
+    - cd ..
+    - betty-style *.c
+    - betty-doc *.c
+  # instead of calling g++ directly you can also use some build toolkit like make
+  # install the necessary build tools when needed
+  # before_script:
+  #   - apt update && apt -y install make autoconf
+  script:
+    - gcc -Wall -Werror -Wextra -pedantic *.c -o hello
+    - ./hello
+  artifacts:
+    paths:
+      - hello
